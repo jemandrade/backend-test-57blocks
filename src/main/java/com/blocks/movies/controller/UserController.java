@@ -7,6 +7,7 @@ import com.blocks.movies.model.UserLoginResponse;
 import com.blocks.movies.service.UserService;
 import com.github.dozermapper.core.Mapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,13 +21,20 @@ public class UserController {
     private final AuthenticationManager authenticationManager;
     private final Mapper mapper;
 
-    @PostMapping
+    @PostMapping(
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
     public ResponseEntity<UserCreateResponse> createUser(@RequestBody UserRequest movieUserRequest) {
         MovieUser user = userService.createUser(movieUserRequest);
         return ResponseEntity.ok(mapper.map(user, UserCreateResponse.class));
     }
 
-    @PostMapping("/auth")
+    @PostMapping(
+            path = "/auth",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
     public ResponseEntity<UserLoginResponse> createJwtToken(@RequestBody UserRequest userRequest) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userRequest.getEmail(), userRequest.getPassword()));
