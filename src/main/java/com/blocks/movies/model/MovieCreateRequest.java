@@ -17,4 +17,5 @@ public class MovieCreateRequest {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate releaseDate;
+    private String summary;
 }
