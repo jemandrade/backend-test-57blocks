@@ -36,7 +36,6 @@ public class MovieController {
 
     @GetMapping(
             path = "/{id}",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<Movie> getMovieById(@PathVariable("id") String movieId, @RequestHeader("Authorization") String jwtToken) {
