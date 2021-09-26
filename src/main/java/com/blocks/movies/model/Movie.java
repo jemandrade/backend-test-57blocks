@@ -22,7 +22,7 @@ public class Movie {
     @Column(name = "user_id")
     private UUID userId;
     private String name;
-    private int length;
+    private int length; //Minutes
 
     @Enumerated(EnumType.STRING)
     private Language language;
